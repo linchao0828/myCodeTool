@@ -64,14 +64,14 @@ class STD3Des {
         return $ret;
     }
 
-    private function PaddingPKCS7($data) {
+    private function PaddingPKCS5($data) {
         $block_size   = mcrypt_get_block_size('tripledes', $this->mode);
         $padding_char = $block_size - (strlen($data) % $block_size);
         $data .= str_repeat(chr($padding_char), $padding_char);
         return $data;
     }
 
-    private function UnPaddingPKCS7($text) {
+    private function UnPaddingPKCS5($text) {
         $pad = ord($text{strlen($text) - 1});
         if ($pad > strlen($text)) {
             return false;
